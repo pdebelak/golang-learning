@@ -1,0 +1,51 @@
+{{ define "header" }}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{.}} | WikiWAT</title>
+  <style type="text/css">
+    html {
+      box-sizing: border-box;
+      background-color: #ffe;
+    }
+
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    div.container {
+      width: 75%;
+      margin: 0 auto;
+      padding: 30px 0;
+    }
+
+    nav {
+      text-align: center;
+    }
+
+    nav ul {
+      padding: 0;
+      list-style: none;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 30px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+{{ end }}
+
+{{ define "footer" }}
+  </div>
+</body>
+</html>
+{{ end }}
