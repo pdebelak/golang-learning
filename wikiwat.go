@@ -16,11 +16,12 @@ type Page struct {
 	Body string
 }
 
-var templates = template.Must(template.ParseFiles("tmpl/edit.html", 
-												  "tmpl/view.html", 
-												  "tmpl/home.html", 
-												  "tmpl/about.html",
-												  "tmpl/base.html"))
+var templates = template.Must(
+				template.ParseFiles("tmpl/edit.html", 
+								  	"tmpl/view.html", 
+									"tmpl/home.html", 
+									"tmpl/about.html",
+									"tmpl/base.html"))
 var validPath = regexp.MustCompile("^/(edit|save|view)/([a-zA-Z0-9]+)$")
 var db *sql.DB
 
