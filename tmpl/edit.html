@@ -1,10 +1,13 @@
 {{ define "edit" }}
-{{ template "header" .Title }}
-  <h1>Editing {{.Title}}</h1>
+{{ template "header" .PageTitle }}
+  <h1>Editing {{.ThisPage.Title}}</h1>
 
-  <form action="/save/{{.Title}}" method="POST">
-    <div><textarea name="body" rows="20" cols="80">{{.Body}}</textarea></div>
+  <form action="/save/{{.ThisPage.Title}}" method="POST">
+    <div><textarea name="body" rows="20" cols="80">{{.ThisPage.Body}}</textarea></div>
     <div><input type="submit" value="Save"></div>
   </form>
+
+  <br><p>First created - {{.ThisPage.FormattedCreate}}</p>
+  <p>Last updated - {{.ThisPage.FormattedUpdate}}</p>
 {{ template "footer" }}
 {{ end }}

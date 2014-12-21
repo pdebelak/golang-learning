@@ -6,9 +6,16 @@
     <p>Here's how it works:</p>
     <ol>
       <li>Think of something you want to write about.</li>
-      <li>Navigate to localhost:8080/view/ThatThing.</li>
+      <li>Navigate to <a href="/page/ThatThing">/page/ThatThing</a>.</li>
       <li>Either see what others have written and edit it, or create a new wiki page right there!</li>
     </ol>
     <p>Keep in mind that anyone, anywhere, can edit your page with no accountability.</p>
+    <h2>Recent Updates</h2>
+    <ul>
+    {{range .List}}
+      <li><a href="/page/{{.}}">{{.}}</a></li>
+    {{end}}
+    </ul>
+  </div>
 {{ template "footer" }}
 {{ end }}

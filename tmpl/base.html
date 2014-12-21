@@ -3,36 +3,7 @@
 <html>
 <head>
   <title>{{.}} | WikiWAT</title>
-  <style type="text/css">
-    html {
-      box-sizing: border-box;
-      background-color: #ffe;
-    }
-
-    *, *:before, *:after {
-      box-sizing: inherit;
-    }
-
-    div.container {
-      width: 75%;
-      margin: 0 auto;
-      padding: 30px 0;
-    }
-
-    nav {
-      text-align: center;
-    }
-
-    nav ul {
-      padding: 0;
-      list-style: none;
-    }
-
-    nav ul li {
-      display: inline;
-      margin: 0 30px;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
   <nav>
@@ -46,6 +17,7 @@
 
 {{ define "footer" }}
   </div>
+  <script type="text/javascript" src="/js/application.js"></script>
 </body>
 </html>
 {{ end }}
