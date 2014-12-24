@@ -7,7 +7,6 @@
     <div><input type="submit" value="Save"></div>
   </form>
 
-  <br><p>First created - {{.ThisPage.FormattedCreate}}</p>
-  <p>Last updated - {{.ThisPage.FormattedUpdate}}</p>
+  <br><p>First created: {{.ThisPage.FormattedCreate}} &mdash; Last updated: {{.ThisPage.FormattedUpdate}}</p>
 {{ template "footer" }}
 {{ end }}

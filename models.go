@@ -39,11 +39,15 @@ func (p *Page) create() error {
 }
 
 func (p *Page) FormattedCreate() string {
-	return p.CreatedAt.Format(time.ANSIC)
+	return formatTime(p.CreatedAt)
 }
 
 func (p *Page) FormattedUpdate() string {
-	return p.UpdatedAt.Format(time.ANSIC)
+	return formatTime(p.UpdatedAt)
+}
+
+func formatTime(aTime time.Time) string {
+	return aTime.Format("Mon, Jan _2, 2006 at 15:04:05")	
 }
 
 func loadPage(title string) (*Page, error) {
