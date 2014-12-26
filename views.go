@@ -52,30 +52,38 @@ func makeHandler (fn func (http.ResponseWriter, *http.Request, string)) http.Han
 }
 
 func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
-	p, err := loadPage(title)
-	if err != nil {
+	var page Page
+	notFound := db.Find(&page, "title = ?", title).RecordNotFound()
+	if notFound {
 		http.Redirect(w, r, "/edit/"+title, http.StatusFound)
 		return
 	}
-	renderTemplate(w, "view", p)
+	renderTemplate(w, "view", &page)
 }
 
 func editHandler(w http.ResponseWriter, r *http.Request, title string) {
-	p, err := loadPage(title)
-	if err != nil {
-		p = &Page{Title: title}
-		err = p.create()
+	var page Page
+	notFound := db.Find(&page, "title = ?", title).RecordNotFound()
+	if notFound {
+		page = Page{Title: title}
+		err := db.Create(&page).Error
 		if err != nil {
 			log.Fatal(err)
 		}
 	}
-	renderTemplate(w, "edit", p)
+	renderTemplate(w, "edit", &page)
 }
 
 func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 	body := r.FormValue("body")
-	p := &Page{Title: title, Body: body}
-	err := p.save()
+	var page Page
+	notFound := db.Find(&page, "title = ?", title).RecordNotFound()
+	if notFound {
+		http.Error(w, "Record not found", http.StatusInternalServerError)
+		return
+	}
+	page.Body = body
+	err := db.Save(&page).Error
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -99,4 +107,9 @@ func staticHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		http.Redirect(w, r, "/", http.StatusFound)
 	}
+}
+
+func randomHandler(w http.ResponseWriter, r *http.Request) {
+	title := randomTitle()
+	http.Redirect(w, r, "/page/"+title, http.StatusFound)
 }

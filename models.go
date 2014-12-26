@@ -6,36 +6,11 @@ import (
 )
 
 type Page struct {
-	Title string
+	Id int64
+	Title string `sql:"size:255"`
 	Body string
 	CreatedAt time.Time
 	UpdatedAt time.Time
-}
-
-func (p *Page) save() error {
-	tx, err := db.Begin()
-	if err != nil {
-		log.Fatal(err)
-	}
-	_, err = tx.Exec("update pages set body = $1, updated_at = $2 where title = $3", p.Body, time.Now(), p.Title)
-	if err != nil {
-		log.Fatal(err)
-	}
-	tx.Commit()
-	return err
-}
-
-func (p *Page) create() error {
-	tx, err := db.Begin()
-	if err != nil {
-		return err
-	}
-	_, err = tx.Exec("insert into pages (title, created_at) values ($1, $2)", p.Title, time.Now())
-	if err != nil {
-		return err
-	}
-	tx.Commit()
-	return err
 }
 
 func (p *Page) FormattedCreate() string {
@@ -47,45 +22,24 @@ func (p *Page) FormattedUpdate() string {
 }
 
 func formatTime(aTime time.Time) string {
-	return aTime.Format("Mon, Jan _2, 2006 at 15:04:05")	
-}
-
-func loadPage(title string) (*Page, error) {
-	stmt, err := db.Prepare("select body, updated_at, created_at from pages where title = $1")
-	if err != nil {
-		return nil, err
-	}
-	defer stmt.Close()
-	var (
-		body string
-		updated_at time.Time
-		created_at time.Time
-	)
-	err = stmt.QueryRow(title).Scan(&body, &updated_at, &created_at)
-	if err != nil {
-		return nil, err
-	}
-	return &Page{Title: title, Body: body, CreatedAt: created_at, UpdatedAt: updated_at}, nil
+	return aTime.Format("Mon, Jan _2, 2006 at 15:04:05")
 }
 
 func recentPages() ([]string) {
-	var pages []string
-	var title string
-	rows, err := db.Query("select title from pages order by updated_at desc limit 5")
+	var titles []string
+	var pages []Page
+	err := db.Order("updated_at desc").Limit(5).Find(&pages).Pluck("title", &titles).Error
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer rows.Close()
-	for rows.Next() {
-		err := rows.Scan(&title)
-		if err != nil {
-			log.Fatal(err)
-		}
-		pages = append(pages, title)
-	}
-	err = rows.Err()
+	return titles
+}
+
+func randomTitle() string {
+	var page Page
+	err := db.Order("RANDOM()").First(&page).Error
 	if err != nil {
 		log.Fatal(err)
 	}
-	return pages
+	return page.Title
 }
