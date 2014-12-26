@@ -1,1 +1,1 @@
-web: wikiwat
+web: golang-learning
