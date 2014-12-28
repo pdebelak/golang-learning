@@ -5,12 +5,14 @@
   <p id="edit-link">[<a href="/edit/{{.ThisPage.Title}}">edit</a>]</p>
 
   <div id="edit-form" class="hide">
-    <p>[<a href="/page/{{.ThisPage.Title}}">cancel</a>]</p>
+    <div class="row"><div class="col-sm-9">
+      <p>[<a href="/page/{{.ThisPage.Title}}">cancel</a>]</p>
 
-    <form action="/save/{{.ThisPage.Title}}" method="POST">
-      <div class="form-group"><textarea name="body" class="form-control" rows="10">{{.ThisPage.Body}}</textarea></div>
-      <input class="btn btn-default pull-right" type="submit" value="Save">
-    </form>
+      <form action="/save/{{.ThisPage.Title}}" method="POST">
+        <div class="form-group"><textarea name="body" class="form-control" rows="10">{{.ThisPage.Body}}</textarea></div>
+        <input class="btn btn-default pull-right" type="submit" value="Save">
+      </form>
+    </div></div>
   <br></div>
 
   <div>{{.DisplayBody}}</div>

@@ -1,0 +1,13 @@
+@media (max-width: 768px) {
+  nav .form-control {
+    width: auto;
+    display: inline-block;
+  }
+  nav .form-group {
+    display: inline-block;
+  }
+  .navbar-form {
+    margin-top: 0;
+    border-top: 0;
+  }
+}

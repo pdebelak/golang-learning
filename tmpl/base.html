@@ -7,6 +7,7 @@
   <title>{{.}} | WikiWAT</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/application.css">
 </head>
 <body>
   <nav class="navbar navbar-default">
@@ -22,16 +23,16 @@
       </div>
 
       <div class="collapse navbar-collapse" id="wikiwat-nav">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/about">About</a></li>
-          <li><a href="/page/random">Random</a></li>
-        </ul>
-        <form action="/page/search" method="GET" class="navbar-form form-inline" role="search">
+        <form action="/page/search" method="GET" class="navbar-form navbar-left" role="search">
           <div class="form-group">
             <input type="text" name="search" class="form-control" placeholder="Find or create a page">
           </div>
           <button type="submit" class="btn btn-default">Go!</button>
         </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/about">About</a></li>
+          <li><a href="/page/random">Random</a></li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -41,8 +42,6 @@
 {{ define "footer" }}
   </div>
   <script type="text/javascript" src="/js/application.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
 {{ end }}
