@@ -21,7 +21,6 @@ var templates = template.Must(
 								  	"tmpl/view.html", 
 									"tmpl/home.html", 
 									"tmpl/about.html",
-									"tmpl/search.html",
 									"tmpl/base.html"))
 var validPath = regexp.MustCompile("^/(edit|save|page)/([a-zA-Z0-9]+)$")
 
