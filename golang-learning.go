@@ -32,6 +32,7 @@ func main() {
 
 	http.HandleFunc("/", staticHandler)
 	http.HandleFunc("/page/random", randomHandler)
+	http.HandleFunc("/page/search", searchHandler)
 	http.HandleFunc("/page/", makeHandler(viewHandler))
 	http.HandleFunc("/edit/", makeHandler(editHandler))
 	http.HandleFunc("/save/", makeHandler(saveHandler))

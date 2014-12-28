@@ -21,6 +21,7 @@ var templates = template.Must(
 								  	"tmpl/view.html", 
 									"tmpl/home.html", 
 									"tmpl/about.html",
+									"tmpl/search.html",
 									"tmpl/base.html"))
 var validPath = regexp.MustCompile("^/(edit|save|page)/([a-zA-Z0-9]+)$")
 
@@ -111,5 +112,12 @@ func staticHandler(w http.ResponseWriter, r *http.Request) {
 
 func randomHandler(w http.ResponseWriter, r *http.Request) {
 	title := randomTitle()
+	http.Redirect(w, r, "/page/"+title, http.StatusFound)
+}
+
+func searchHandler(w http.ResponseWriter, r *http.Request) {
+	query := r.FormValue("search")
+	reg := regexp.MustCompile("[^a-zA-Z0-9]")
+	title := reg.ReplaceAllString(query, "")
 	http.Redirect(w, r, "/page/"+title, http.StatusFound)
 }
