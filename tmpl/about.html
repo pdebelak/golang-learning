@@ -1,5 +1,5 @@
 {{ define "about" }}
-{{ template "header" "About" }}
+{{ template "header" .PageTitle }}
   <h1>About WikiWAT</h1>
   <div>
     <p>WikiWAT is the wiki that knows WAT it's all about.</p>
@@ -13,5 +13,5 @@
     <p>The wiki pages use <a href="http://daringfireball.net/projects/markdown/">markdown</a> for styling. <a href="http://daringfireball.net/projects/markdown/syntax">See here</a> for details on how to write markdown.</p>
     <p>WikiWAT was made by Peter Debelak. See his site <a href="http://www.peterdebelak.com/">here</a>.</p>
   </div>
-{{ template "footer" }}
+{{ template "footer" .List }}
 {{ end }}

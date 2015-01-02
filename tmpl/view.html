@@ -18,5 +18,5 @@
   <div>{{.DisplayBody}}</div>
 
   <br><p>First created: {{.ThisPage.FormattedCreate}} &mdash; Last updated: {{.ThisPage.FormattedUpdate}}</p>
-{{ template "footer" }}
+{{ template "footer" .List }}
 {{ end }}

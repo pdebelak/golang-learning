@@ -33,7 +33,7 @@ func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
 	} else {
 		pt = p.Title
 	}
-	context := &Context{PageTitle: pt, ThisPage: p, DisplayBody: template.HTML(html)}
+	context := &Context{PageTitle: pt, ThisPage: p, DisplayBody: template.HTML(html), List: recentPages()}
 	err := templates.ExecuteTemplate(w, tmpl, context)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -94,13 +94,14 @@ func saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 func staticHandler(w http.ResponseWriter, r *http.Request) {
 	p := template.HTMLEscapeString(r.URL.Path)
 	if p == "/" {
-		context := &Context{List: recentPages()}
+		context := &Context{List: recentPages(), PageTitle: "Home"}
 		err := templates.ExecuteTemplate(w, "home", context)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	} else if p == "/about" {
-		err := templates.ExecuteTemplate(w, "about", nil)
+		context := &Context{List: recentPages(), PageTitle: "About"}
+		err := templates.ExecuteTemplate(w, "about", context)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
